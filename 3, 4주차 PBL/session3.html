@@ -15,9 +15,14 @@
             <p id="count"></p>
         </div>
 
+        <div class="right">
         <button id = "random1">랜덤 1명 추가</button>
         <button id = "random5">랜덤 5명 추가</button>
         <button id = "refresh">새로고침</button>
+
+        <p id="status">준비 완료</p>
+        <button id="retry" style="display:none;">재시도</button>
+        </div>
 
         <div class="addcard" style="display: none;">
         <div class="row">
@@ -61,12 +66,32 @@
         </div>
     </div>
 
+    <div class="search-filter">
+
+        <div class="right">
         <select id="filter">
-            <option value="">파트 필터</option>
+            <div class="right">
             <option value="frontend">Frontend</option>
             <option value="backend">Backend</option>
             <option value="Design">Design</option>
         </select>
+        <p>파트</p>
+        </div>
+
+        <div class="right">
+        <select id="filter">
+            <option value="NumName">이름 순</option>
+            <option value="NumNew">최신 순</option>
+        </select>
+        <p>정렬</p>
+        </div>
+        
+        <div class="right">
+        <input id="search" placeholder="이름으로 검색">
+        <p>검색</p>
+        </div>
+    </div>
+
 
     <div class="cardlist" id="cardContainer">
     <div class="card">

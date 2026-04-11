@@ -86,6 +86,11 @@
         #filter{
             width: 200px;
             border-radius: 10px;
-            margin-bottom: 10px;
-            margin-top: 10px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            margin-left: 30px;
+            display : flex;
+        }
+        .search-filter{
+            display: flex;
         }

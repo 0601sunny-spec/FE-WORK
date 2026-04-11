@@ -234,3 +234,129 @@ function applyFilter() {
 // 🔥 이벤트 연결 (중요)
 searchInput.oninput = applyFilter;
 filterSelect.onchange = applyFilter;
+
+// 랜덤 유저 1명
+document.getElementById("random1").onclick = async function () {
+  const res = await fetch("https://randomuser.me/api/?results=1&nat=us,gb,ca,au,nz");
+  const data = await res.json();
+
+  const user = data.results[0];
+
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const img = document.createElement("img");
+  img.src = user.picture.medium;
+
+  const h2 = document.createElement("h2");
+  h2.textContent = `${user.name.first} ${user.name.last}`;
+
+  const role = document.createElement("p");
+  role.textContent = "Frontend"; // 랜덤 API에는 역할 없음 → 임시값
+
+  const desc = document.createElement("p");
+  desc.textContent = user.email;
+
+  card.appendChild(img);
+  card.appendChild(h2);
+  card.appendChild(role);
+  card.appendChild(desc);
+
+  document.querySelector(".cardlist").appendChild(card);
+
+  updateCardCount();
+};
+
+// 랜덤 유저 5명
+document.getElementById("random5").onclick = async function () {
+  const res = await fetch("https://randomuser.me/api/?results=5&nat=us,gb,ca,au,nz");
+  const data = await res.json();
+
+  data.results.forEach(user => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const img = document.createElement("img");
+    img.src = user.picture.medium;
+
+    const h2 = document.createElement("h2");
+    h2.textContent = `${user.name.first} ${user.name.last}`;
+
+    const role = document.createElement("p");
+    role.textContent = "Frontend";
+
+    const desc = document.createElement("p");
+    desc.textContent = user.email;
+
+    card.appendChild(img);
+    card.appendChild(h2);
+    card.appendChild(role);
+    card.appendChild(desc);
+
+    document.querySelector(".cardlist").appendChild(card);
+  });
+
+  updateCardCount();
+};
+// 새로고침 버튼
+const status = document.getElementById("status");
+
+document.getElementById("refresh").onclick = async function () {
+
+  const cardList = document.querySelector(".cardlist");
+
+  // 1. 현재 카드 개수 저장
+  const currentCount = cardList.querySelectorAll(".card").length;
+
+  // 2. 상태 변경
+  status.textContent = "불러오는 중...";
+
+  try {
+    // 3. 기존 카드 삭제
+    cardList.querySelectorAll(".card").forEach(card => card.remove());
+
+    // 4. 새 데이터 요청
+    const res = await fetch(
+      `https://randomuser.me/api/?results=${currentCount}&nat=us,gb,ca,au,nz`
+    );
+
+    if (!res.ok) throw new Error("네트워크 오류");
+
+    const data = await res.json();
+
+    // 5. 카드 다시 생성
+    data.results.forEach(user => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const img = document.createElement("img");
+      img.src = user.picture.medium;
+
+      const h2 = document.createElement("h2");
+      h2.textContent = `${user.name.first} ${user.name.last}`;
+
+      const role = document.createElement("p");
+      role.textContent = "Frontend";
+
+      const desc = document.createElement("p");
+      desc.textContent = user.email;
+
+      card.appendChild(img);
+      card.appendChild(h2);
+      card.appendChild(role);
+      card.appendChild(desc);
+
+      cardList.appendChild(card);
+    });
+
+    // 6. 상태 완료
+    status.textContent = "완료!";
+    setTimeout(() => status.textContent = "준비 완료", 1000);
+
+  } catch (err) {
+    status.textContent = "불러오기 실패";
+  }
+
+  // 7. 개수 업데이트
+  updateCardCount();
+};

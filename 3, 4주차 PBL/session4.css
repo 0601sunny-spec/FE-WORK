@@ -55,7 +55,42 @@
         display: none;
         width: 95%;
         background-color: white;
-        border-radius: 10px; /* 10 → 10px로 수정해야 적용됨 */
+        border-radius: 10px;
         padding: 20px;
         margin: 20px 0;
+        }
+
+        .right{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: -15px;
+            margin-bottom: -12px;
+        }
+        .del{
+            padding: 6px 12px;
+            height: 5px;
+            margin-top: -15px;
+            margin-bottom: -12px;
+        }
+        
+        button{
+            border-radius: 10px;
+        }
+        #search{
+            width: 200px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        #filter{
+            width: 200px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            margin-left: 30px;
+            display : flex;
+        }
+        .search-filter{
+            display: flex;
         }
